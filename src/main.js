@@ -62,10 +62,6 @@ const isIntro = new Swiper('.swiper.is-intro', {
   grabCursor: true, //just changes the icon
   followFinger: true, //drag on touchpad/mobile
   keyboard: true,
-  // autoplay: {
-  //   delay: 5000,
-  //   disableOnInteraction: false,
-  // },
   mousewheel: {
     eventsTarget: '.swiper.is-intro', // Listen for mousewheel events on the swiper container
     invert: false,
