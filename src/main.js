@@ -39,7 +39,7 @@ splineElement.style.pointerEvents = 'none'
 
 function enableScrolling() {
   // Enable scrolling after the delay
-  document.body.style.overflow = 'auto'
+  document.body.style.overflowY = 'auto'
   splineElement.style.pointerEvents = 'auto'
 }
 
@@ -68,20 +68,17 @@ const isIntro = new Swiper('.swiper.is-intro', {
     releaseOnEdges: true, // Releases the scrollbar when it hits the end
   },
 
-  // Navigation arrows
-  navigation: {
-    nextEl: '.slider-next',
-    prevEl: '.slider-prev',
-    //disabledClass: 'is-disabled',
-  },
-
   pagination: {
     el: '.swiper-pagination-progressbar',
     type: 'progressbar',
     clickable: true,
     progressbarFillClass: 'swiper-pagination-progressbar-fill',
+    direction: 'vertical', // Set pagination direction to vertical
   },
 })
+
+//enable disable the swiper
+//
 
 //horizontal scrolling effect
 let wrapperTween = gsap.to(wrapper, {
@@ -98,34 +95,15 @@ let wrapperTween = gsap.to(wrapper, {
   },
 })
 
-//parallax effect
-items.forEach((item) => {
-  gsap.fromTo(
-    item,
-    {
-      backgroundPosition: '0% 50%',
-    },
-    {
-      backgroundPosition: '100% 50%',
-      ease: 'none',
-      scrollTrigger: {
-        trigger: item,
-        containerAnimation: wrapperTween, //link the animation to the main scrolltrigger
-        //sets this trigger as it is nested in another scrolltrigger
-        start: 'left right',
-        end: 'right left',
-        scrub: true,
-        markers: false,
-      },
-    }
-  )
-})
-
 const sageHeadingWrap = document.querySelector('.is-sage')
 const sageCardsWrap = document.querySelector('.sage-cards-wrap')
 
 sageCardsWrap.style.marginBottom = '-300vh'
 const cards = document.querySelectorAll('.card')
+
+gsap.set(cards[0], { rotationZ: -45 })
+gsap.set(cards[1], { rotationZ: 45 })
+gsap.set(cards[2], { rotationZ: -30 })
 
 const animatecards = gsap.timeline({
   scrollTrigger: {
@@ -138,9 +116,9 @@ const animatecards = gsap.timeline({
   ease: 'none',
 })
 animatecards
-  .to(cards[0], { y: '-100vh' })
-  .to(cards[1], { y: '-100vh' })
-  .to(cards[2], { y: '-100vh' })
+  .to(cards[0], { y: '-100vh', rotationZ: -3 })
+  .to(cards[1], { y: '-100vh', rotationZ: 2 })
+  .to(cards[2], { y: '-100vh', rotationZ: 3 })
 //
 
 function animateNextCard() {
