@@ -1,7 +1,9 @@
 /* eslint-disable */
-
+import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Flip } from 'gsap/Flip'
+gsap.registerPlugin(Flip)
 gsap.registerPlugin(ScrollTrigger)
 
 import Swiper from 'swiper'
@@ -30,12 +32,31 @@ Swiper.use([
   Parallax,
 ])
 
+//LENIS
+const lenis = new Lenis()
+
+lenis.on('scroll', (e) => {
+  console.log(e)
+})
+
+lenis.on('scroll', ScrollTrigger.update)
+
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000)
+})
+
+gsap.ticker.lagSmoothing(0)
+//
+
 const horizontalSection = document.querySelector('.layout')
 const wrapper = horizontalSection.querySelector('.wrapper')
 const items = wrapper.querySelectorAll('.item')
 document.body.style.overflow = 'hidden'
 const splineElement = document.querySelector('.spline')
 splineElement.style.pointerEvents = 'none'
+const bulletWrapper = document.querySelector('.swiper-bullet-wrapper')
+bulletWrapper.style.borderRadius = '100vw'
+bulletWrapper.style.overflow = 'hidden'
 
 function enableScrolling() {
   // Enable scrolling after the delay
@@ -52,32 +73,129 @@ gsap.to(
 )
 
 // MOBILE SWIPER
-const isIntro = new Swiper('.swiper.is-intro', {
+const isDownload = new Swiper('.swiper.is-download', {
   slideActiveClass: 'is-active',
-  slidesPerView: 1,
-  speed: 800,
+  slideDuplicateActiveClass: 'is-active',
+  slidesPerView: 'auto',
+  speed: 400,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
   effect: 'fade',
-  // loop: true,
+  //loop: true,
+  keyboard: true,
   allowTouchMove: true,
   grabCursor: true, //just changes the icon
   followFinger: true, //drag on touchpad/mobile
   keyboard: true,
   mousewheel: {
-    eventsTarget: '.swiper.is-intro', // Listen for mousewheel events on the swiper container
-    invert: false,
-    releaseOnEdges: true, // Releases the scrollbar when it hits the end
+    forceToAxis: true,
   },
-
   pagination: {
-    el: '.swiper-pagination-progressbar',
+    el: '.swiper-pagination-progressbar.is-slider-titles',
     type: 'progressbar',
     clickable: true,
     progressbarFillClass: 'swiper-pagination-progressbar-fill',
-    direction: 'vertical', // Set pagination direction to vertical
   },
 })
 
-//enable disable the swiper
+//explainer swiper
+function doubleDigits(num) {
+  if (num < 10) {
+    return '0' + num
+  } else return num
+}
+const bgslider = new Swiper('.swiper_gallery', {
+  slidePerView: 1,
+  speed: 800,
+  effect: 'fade',
+  loop: true,
+  // loopedSlides: 8,
+  allowTouchMove: false, //click an drag
+})
+
+//TEXT SLIDER
+const textslider = new Swiper('.swiper_titles', {
+  slideActiveClass: 'is-active',
+  slideDuplicateActiveClass: 'is-active',
+  slidesPerView: 'auto',
+  speed: 800,
+  loop: true,
+  keyboard: true,
+  mousewheel: {
+    forceToAxis: true,
+  },
+  slideToClickedSlide: true,
+  centeredSlides: true,
+  allowTouchMove: true, //click and drag to change
+  followFinger: true, //move with click and drag
+  thumbs: {
+    swiper: bgslider,
+  },
+  navigation: {
+    nextEl: '.slider-next',
+    prevEl: '.slider-prev',
+  },
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: bulletWrapper,
+    bulletClass: 'swiper-bullet',
+    bulletActiveClass: 'is-active',
+    bulletElement: 'button',
+    clickable: true,
+    renderBullet: function (index, className) {
+      return (
+        '<span class="' +
+        className +
+        '">' +
+        //
+        '<div class="' +
+        'bullet-bg' +
+        '">' +
+        '</div>' +
+        //
+        '<div class="' +
+        'bullet-progress' +
+        '">' +
+        '</div>' +
+        //
+        '<div class="' +
+        'o-progress' +
+        '">' +
+        '</div>' +
+        //
+        '</span>'
+      )
+    },
+  },
+
+  on: {
+    realIndexChange: function () {
+      // Get the real index
+      const realIndex = this.realIndex
+
+      // Loop through each bullet
+      document.querySelectorAll('.swiper-bullet').forEach((bullet, index) => {
+        const oProgress = bullet.querySelector('.o-progress')
+        // Check if the index of the bullet is less than the realIndex
+        if (realIndex == 0) {
+          if (oProgress) {
+            oProgress.style.display = 'none'
+          }
+        } else if (index < realIndex) {
+          // Find the o-progress div within the bullet and set its display to block
+          if (oProgress) {
+            oProgress.style.display = 'block'
+          }
+        }
+      })
+    },
+  },
+})
 //
 
 //horizontal scrolling effect
