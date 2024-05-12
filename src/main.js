@@ -72,35 +72,8 @@ gsap.to(
   }
 )
 
-// MOBILE SWIPER
-const isDownload = new Swiper('.swiper.is-download', {
-  slideActiveClass: 'is-active',
-  slideDuplicateActiveClass: 'is-active',
-  slidesPerView: 'auto',
-  speed: 400,
-  autoplay: {
-    delay: 5000,
-    disableOnInteraction: false,
-  },
-  effect: 'fade',
-  //loop: true,
-  keyboard: true,
-  allowTouchMove: true,
-  grabCursor: true, //just changes the icon
-  followFinger: true, //drag on touchpad/mobile
-  keyboard: true,
-  mousewheel: {
-    forceToAxis: true,
-  },
-  pagination: {
-    el: '.swiper-pagination-progressbar.is-slider-titles',
-    type: 'progressbar',
-    clickable: true,
-    progressbarFillClass: 'swiper-pagination-progressbar-fill',
-  },
-})
+//////EXPLAINER SLIDER
 
-//explainer swiper
 function doubleDigits(num) {
   if (num < 10) {
     return '0' + num
@@ -122,6 +95,7 @@ const textslider = new Swiper('.swiper_titles', {
   slidesPerView: 'auto',
   speed: 800,
   loop: true,
+  grabCursor: true,
   keyboard: true,
   mousewheel: {
     forceToAxis: true,
