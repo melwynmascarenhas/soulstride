@@ -48,12 +48,10 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0)
 //
 
-const horizontalSection = document.querySelector('.layout')
+const horizontalSection = document.querySelector('.is-saboteurs')
 const wrapper = horizontalSection.querySelector('.wrapper')
 const items = wrapper.querySelectorAll('.item')
 document.body.style.overflow = 'hidden'
-const splineElement = document.querySelector('.spline')
-splineElement.style.pointerEvents = 'none'
 const bulletWrapper = document.querySelector('.swiper-bullet-wrapper')
 bulletWrapper.style.borderRadius = '100vw'
 bulletWrapper.style.overflow = 'hidden'
@@ -61,7 +59,6 @@ bulletWrapper.style.overflow = 'hidden'
 function enableScrolling() {
   // Enable scrolling after the delay
   document.body.style.overflowY = 'auto'
-  splineElement.style.pointerEvents = 'auto'
 }
 
 gsap.to(
@@ -73,20 +70,6 @@ gsap.to(
 )
 
 //////EXPLAINER SLIDER
-
-function doubleDigits(num) {
-  if (num < 10) {
-    return '0' + num
-  } else return num
-}
-const bgslider = new Swiper('.swiper_gallery', {
-  slidePerView: 1,
-  speed: 800,
-  effect: 'fade',
-  loop: true,
-  // loopedSlides: 8,
-  allowTouchMove: false, //click an drag
-})
 
 //TEXT SLIDER
 const textslider = new Swiper('.swiper_titles', {
@@ -104,9 +87,6 @@ const textslider = new Swiper('.swiper_titles', {
   centeredSlides: true,
   allowTouchMove: true, //click and drag to change
   followFinger: true, //move with click and drag
-  thumbs: {
-    swiper: bgslider,
-  },
   navigation: {
     nextEl: '.slider-next',
     prevEl: '.slider-prev',
@@ -180,7 +160,7 @@ let wrapperTween = gsap.to(wrapper, {
     markers: true,
     trigger: horizontalSection,
     pin: true,
-    start: 'top top',
+    start: 'top 6%',
     end: () => `+=${items[0].offsetWidth * items.length}`,
     scrub: 1,
     invalidateOnRefresh: true, //recalculate the start and end points when window resize
@@ -216,3 +196,31 @@ animatecards
 function animateNextCard() {
   animatecards.play() // Continue playing the timeline to animate the next card
 }
+
+//TESTIMONIAL SWIPER
+const teamSlider = new Swiper('.swiper.is-testimonial', {
+  // Parameters
+  slidesPerView: 1.5,
+  spaceBetween: 24,
+  breakpoints: {
+    // When window width is >= 768px
+    768: {
+      slidesPerView: 2.5,
+    },
+    992: {
+      slidesPerView: 3,
+    },
+    1440: {
+      slidesPerView: 'auto',
+    },
+  },
+  loop: true,
+  allowTouchMove: false,
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-btn-next',
+    prevEl: '.swiper-btn-prev',
+  },
+})
+//TESTIMONIAL SWIPER ENDS
