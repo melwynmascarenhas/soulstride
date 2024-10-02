@@ -223,4 +223,3 @@ const teamSlider = new Swiper('.swiper.is-testimonial', {
     prevEl: '.swiper-btn-prev',
   },
 })
-//TESTIMONIAL SWIPER ENDSs
