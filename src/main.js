@@ -167,7 +167,7 @@ let wrapperTween = gsap.to(wrapper, {
   },
 })
 
-const sageHeadingWrap = document.querySelector('.is-sage')
+const sageSection = document.querySelector('.is-sage')
 const sageCardsWrap = document.querySelector('.sage-cards-wrap')
 
 sageCardsWrap.style.marginBottom = '-300vh'
@@ -183,7 +183,7 @@ const animatecards = gsap.timeline({
     start: 'top bottom', // Start the animation when the top of the element hits the center of the viewport
     end: 'bottom bottom', // End the animation when the bottom of the element hits the center of the viewport
     scrub: true, // Smoothly animate elements as the user scrolls
-    pin: sageHeadingWrap,
+    pin: sageSection,
   },
   ease: 'none',
 })
