@@ -48,6 +48,49 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0)
 //
 
+//PRELOADER
+
+const numberElement = document.querySelector('.number')
+let counter = 0
+const duration = 3000 // 4 seconds
+const interval = duration / 100 // interval for each increment
+
+function updateCount() {
+  const updateCounter = setInterval(() => {
+    counter++
+    numberElement.textContent = counter
+    if (counter === 100) {
+      clearInterval(updateCounter)
+    }
+  }, interval)
+}
+
+gsap.set('svg rect', {
+  width: '0%',
+})
+
+const preloaderTL = gsap.timeline()
+
+preloaderTL
+  .to('svg rect', {
+    duration: 3,
+    width: '100%', // Animate the width to cover the SVG
+    ease: 'power1.inOut',
+    onStart: updateCount,
+  })
+  .to(
+    '.pre-loader',
+    {
+      delay: 0.5,
+      duration: 1,
+      opacity: 0,
+      ease: 'power1.inOut',
+    },
+    '>'
+  )
+
+//
+
 const horizontalSection = document.querySelector('.is-saboteurs')
 const wrapper = horizontalSection.querySelector('.wrapper')
 const items = wrapper.querySelectorAll('.item')
