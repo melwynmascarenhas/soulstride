@@ -32,21 +32,29 @@ Swiper.use([
   Parallax,
 ])
 
-//LENIS
-const lenis = new Lenis()
+window.onload = function () {
+  document.body.style.overflow = 'hidden'
+}
 
-lenis.on('scroll', (e) => {
-  console.log(e)
-})
+function enableScrolling() {
+  // Enable scrolling after the delay
+  document.body.style.overflowY = 'auto'
+  //LENIS
+  const lenis = new Lenis()
 
-lenis.on('scroll', ScrollTrigger.update)
+  lenis.on('scroll', (e) => {
+    console.log(e)
+  })
 
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000)
-})
+  lenis.on('scroll', ScrollTrigger.update)
 
-gsap.ticker.lagSmoothing(0)
-//
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000)
+  })
+
+  gsap.ticker.lagSmoothing(0)
+  //
+}
 
 //PRELOADER
 
@@ -85,6 +93,7 @@ preloaderTL
       duration: 1,
       opacity: 0,
       ease: 'power1.inOut',
+      onComplete: enableScrolling,
     },
     '>'
   )
@@ -98,19 +107,6 @@ document.body.style.overflow = 'hidden'
 const bulletWrapper = document.querySelector('.swiper-bullet-wrapper')
 bulletWrapper.style.borderRadius = '100vw'
 bulletWrapper.style.overflow = 'hidden'
-
-function enableScrolling() {
-  // Enable scrolling after the delay
-  document.body.style.overflowY = 'auto'
-}
-
-gsap.to(
-  {},
-  {
-    duration: 1,
-    onComplete: enableScrolling, // Call enableScrolling function after the delay
-  }
-)
 
 //////EXPLAINER SLIDER
 
@@ -258,7 +254,7 @@ const teamSlider = new Swiper('.swiper.is-testimonial', {
     },
   },
   loop: true,
-  allowTouchMove: false,
+  allowTouchMove: true,
 
   // Navigation arrows
   navigation: {
