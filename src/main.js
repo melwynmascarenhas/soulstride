@@ -262,3 +262,92 @@ const teamSlider = new Swiper('.swiper.is-testimonial', {
     prevEl: '.swiper-btn-prev',
   },
 })
+
+//FLIP MENU
+gsap.registerPlugin(Flip)
+let hamburgerEl = document.querySelector('.nav_hamburger_wrap')
+let navLineEl = document.querySelectorAll('.nav_hamburger_line')
+let flipItemEl = document.querySelector('.nav_hamburger_base')
+let menuWrapEl = document.querySelector('.mob_menu_wrap')
+let menuBaseEl = document.querySelector('.menu_base')
+let menuContainEl = document.querySelector('.mob_menu_contain')
+
+let flipDuration = 0.6
+
+function flip(forwards) {
+  let state = Flip.getState(flipItemEl)
+  if (forwards) {
+    menuContainEl.appendChild(flipItemEl)
+  } else {
+    hamburgerEl.appendChild(flipItemEl)
+  }
+  Flip.from(state, { duration: flipDuration })
+}
+
+let tl = gsap.timeline({ paused: true })
+tl.set(menuWrapEl, { display: 'flex' })
+//from is used because we want to move the base first
+tl.from(menuBaseEl, {
+  opacity: 0,
+  duration: flipDuration,
+  ease: 'none',
+  //conditional...only runs when the timeline starts
+  onStart: function () {
+    flip(true)
+  },
+})
+tl.to(navLineEl[0], { y: 4, rotate: 45, duration: flipDuration }, '<')
+tl.to(navLineEl[1], { y: -4, rotate: -45, duration: flipDuration }, '<')
+
+const menuLinks = gsap.utils.toArray('.menu_link')
+tl.from(menuLinks, {
+  opacity: 0,
+  yPercent: 50,
+  duration: 0.2,
+  stagger: { amount: 0.2 },
+  //conditional...only runs when the tween finishes the reverse to the start point
+  //here moving the base after the links disappear completely
+  onReverseComplete: function () {
+    flip(false)
+  },
+})
+
+function openMenu(open) {
+  //check if the animation is playing to stop intteruption
+  if (!tl.isActive()) {
+    if (open) {
+      tl.play()
+      hamburgerEl.classList.add('nav-open')
+      document.body.style.overflow = 'hidden'
+    } else {
+      //play close animation because because open menu was set to false
+      tl.reverse()
+      hamburgerEl.classList.remove('nav-open')
+      document.body.style.overflow = ''
+    }
+  }
+}
+
+//callback to perform menu open or close
+hamburgerEl.addEventListener('click', function () {
+  //checking if the menu is open or closed
+  if (hamburgerEl.classList.contains('nav-open')) {
+    //then set openmenu to false
+    openMenu(false)
+  } else {
+    openMenu(true)
+  }
+})
+
+menuBaseEl.addEventListener('mouseenter', function () {
+  openMenu(false)
+})
+menuBaseEl.addEventListener('click', function () {
+  openMenu(false)
+})
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    openMenu(false)
+  }
+})
