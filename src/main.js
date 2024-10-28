@@ -190,7 +190,7 @@ let wrapperTween = gsap.to(wrapper, {
   x: () => (wrapper.offsetWidth - window.innerWidth) * -1,
   ease: 'none',
   scrollTrigger: {
-    markers: true,
+    // markers: true,
     trigger: horizontalSection,
     pin: true,
     start: 'top 6%',
