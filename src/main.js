@@ -33,7 +33,7 @@ Swiper.use([
 ])
 
 window.onload = function () {
-  document.body.style.overflow = 'hidden'
+  // document.body.style.overflow = 'hidden'
 }
 
 function enableScrolling() {
@@ -45,19 +45,15 @@ function enableScrolling() {
   lenis.on('scroll', (e) => {
     console.log(e)
   })
-
   lenis.on('scroll', ScrollTrigger.update)
-
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000)
   })
-
   gsap.ticker.lagSmoothing(0)
   //
 }
-
+enableScrolling()
 //PRELOADER
-
 const numberElement = document.querySelector('.number')
 let counter = 0
 const duration = 3000 // 4 seconds
@@ -78,7 +74,6 @@ gsap.set('svg rect', {
 })
 
 const preloaderTL = gsap.timeline()
-
 preloaderTL
   .to('svg rect', {
     duration: 3,
@@ -93,11 +88,10 @@ preloaderTL
       duration: 1,
       opacity: 0,
       ease: 'power1.inOut',
-      onComplete: enableScrolling,
+      // onComplete: enableScrolling,
     },
     '>'
   )
-
 //
 
 const horizontalSection = document.querySelector('.is-saboteurs')
@@ -240,17 +234,28 @@ function animateNextCard() {
 const teamSlider = new Swiper('.swiper.is-testimonial', {
   // Parameters
   slidesPerView: 1.5,
-  spaceBetween: 24,
+  spaceBetween: 16,
   breakpoints: {
     // When window width is >= 768px
+    320: {
+      slidesPerView: 1.5,
+      spaceBetween: 16,
+    },
+    480: {
+      slidesPerView: 2,
+      spaceBetween: 16,
+    },
     768: {
       slidesPerView: 2.5,
+      spaceBetween: 24,
     },
     992: {
       slidesPerView: 3,
+      spaceBetween: 24,
     },
     1440: {
       slidesPerView: 'auto',
+      spaceBetween: 24,
     },
   },
   loop: true,
