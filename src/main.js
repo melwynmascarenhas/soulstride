@@ -33,7 +33,7 @@ Swiper.use([
 ])
 
 window.onload = function () {
-  // document.body.style.overflow = 'hidden'
+  document.body.style.overflow = 'hidden'
 }
 
 function enableScrolling() {
@@ -52,7 +52,7 @@ function enableScrolling() {
   gsap.ticker.lagSmoothing(0)
   //
 }
-enableScrolling()
+
 //PRELOADER
 const numberElement = document.querySelector('.number')
 let counter = 0
@@ -88,7 +88,7 @@ preloaderTL
       duration: 1,
       opacity: 0,
       ease: 'power1.inOut',
-      // onComplete: enableScrolling,
+      onComplete: enableScrolling,
     },
     '>'
   )
