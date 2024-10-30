@@ -32,9 +32,7 @@ Swiper.use([
   Parallax,
 ])
 
-window.onload = function () {
-  document.body.style.overflow = 'hidden'
-}
+document.body.style.overflow = 'hidden'
 
 function enableScrolling() {
   // Enable scrolling after the delay
@@ -74,6 +72,7 @@ gsap.set('svg rect', {
 })
 
 const preloaderTL = gsap.timeline()
+
 preloaderTL
   .to('svg rect', {
     duration: 3,
