@@ -101,7 +101,7 @@ bulletWrapper.style.overflow = 'hidden'
 //////EXPLAINER SLIDER
 
 //TEXT SLIDER
-const textslider = new Swiper('.swiper_titles', {
+const textslider = new Swiper('.explainer_swiper', {
   slideActiveClass: 'is-active',
   slideDuplicateActiveClass: 'is-active',
   slidesPerView: 'auto',
