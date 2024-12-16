@@ -196,11 +196,11 @@ let wrapperTween = gsap.to(wrapper, {
   },
 })
 
-const sageHeadingWrap = document.querySelector('.sage-heading-wrap')
+const sageHeadingWrap = document.querySelector('.is-sage')
 const sageCardsWrap = document.querySelector('.sage-cards-wrap')
 
 sageCardsWrap.style.marginBottom = '-300vh'
-const cards = document.querySelectorAll('.sage_card')
+const cards = document.querySelectorAll('.card')
 
 gsap.set(cards[0], { rotationZ: -45 })
 gsap.set(cards[1], { rotationZ: 45 })
