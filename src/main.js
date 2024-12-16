@@ -266,12 +266,12 @@ const teamSlider = new Swiper('.swiper.is-testimonial', {
 
 //FLIP MENU
 gsap.registerPlugin(Flip)
-let hamburgerEl = document.querySelector('.nav_hamburger-wrap')
-let navLineEl = document.querySelectorAll('.nav_hamburger-line')
-let flipItemEl = document.querySelector('.nav_hamburger-base')
-let menuWrapEl = document.querySelector('.nav_menu-wrap')
-let menuBaseEl = document.querySelector('.nav_menu-base')
-let menuContainEl = document.querySelector('.nav_menu-container')
+let hamburgerEl = document.querySelector('.nav_hamburger_wrap')
+let navLineEl = document.querySelectorAll('.nav_hamburger_line')
+let flipItemEl = document.querySelector('.nav_hamburger_base')
+let menuWrapEl = document.querySelector('.mob_menu_wrap')
+let menuBaseEl = document.querySelector('.menu_base')
+let menuContainEl = document.querySelector('.mob_menu_contain')
 
 let flipDuration = 0.6
 
