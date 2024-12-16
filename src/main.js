@@ -91,8 +91,8 @@ preloaderTL
 //
 
 const horizontalSection = document.querySelector('.is-saboteurs')
-const wrapper = horizontalSection.querySelector('.wrapper')
-const items = wrapper.querySelectorAll('.item')
+const wrapper = horizontalSection.querySelector('.saboteurs_wrapper')
+const items = wrapper.querySelectorAll('.saboteurs_item')
 document.body.style.overflow = 'hidden'
 const bulletWrapper = document.querySelector('.swiper-bullet-wrapper')
 bulletWrapper.style.borderRadius = '100vw'
