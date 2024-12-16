@@ -269,7 +269,7 @@ gsap.registerPlugin(Flip)
 let hamburgerEl = document.querySelector('.nav_hamburger_wrap')
 let navLineEl = document.querySelectorAll('.nav_hamburger_line')
 let flipItemEl = document.querySelector('.nav_hamburger_base')
-let menuWrapEl = document.querySelector('.mob_menu_wrap')
+let menuWrapEl = document.querySelector('.nav_mobile_menu-wrap')
 let menuBaseEl = document.querySelector('.menu_base')
 let menuContainEl = document.querySelector('.mob_menu_contain')
 
