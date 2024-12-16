@@ -196,8 +196,8 @@ let wrapperTween = gsap.to(wrapper, {
   },
 })
 
-const sageHeadingWrap = document.querySelector('.is-sage-background')
-const sageCardsWrap = document.querySelector('.sage_cards-wrap')
+const sageHeadingWrap = document.querySelector('.sage-heading-wrap')
+const sageCardsWrap = document.querySelector('.sage-cards-wrap')
 
 sageCardsWrap.style.marginBottom = '-300vh'
 const cards = document.querySelectorAll('.sage_card')
