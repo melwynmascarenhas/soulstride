@@ -300,7 +300,7 @@ tl.from(menuBaseEl, {
 tl.to(navLineEl[0], { y: 4, rotate: 45, duration: flipDuration }, '<')
 tl.to(navLineEl[1], { y: -4, rotate: -45, duration: flipDuration }, '<')
 
-const menuLinks = gsap.utils.toArray('.menu_link')
+const menuLinks = gsap.utils.toArray('.nav_menu-link')
 tl.from(menuLinks, {
   opacity: 0,
   yPercent: 50,
