@@ -34,8 +34,6 @@ Swiper.use([
 
 document.body.style.overflow = 'hidden'
 
-window.alert('dcs')
-
 function enableScrolling() {
   // Enable scrolling after the delay
   document.body.style.overflowY = 'auto'
